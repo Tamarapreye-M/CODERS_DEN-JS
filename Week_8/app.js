@@ -242,17 +242,13 @@ console.log(Object.keys(users));
 console.log(Object.values(users));
 
 /*7 */
+import { countries_data } from "./countries.js";
+console.log(countries_data);
 // since i can't import variables from another file, I would comment out the code for this questiion
-/***
- * const copy = Object.assign({}, countries)
- * function newData (){
- * for(data in copy){
- * // delete all the properties you dont want and return the remaining object
- * delete copy[data].
- * }
- * return copy
- * }
- */
+
+for (let data of countries_data) {
+	console.log(data.name, data.capital, data.population, data.languages);
+}
 
 // Exercise level 3
 /*1 */
@@ -468,13 +464,14 @@ console.log(averageRating("mobile phone", products));
 // just add user id when liked and remove user id when unliked
 function likeProduct(name, id, database) {
 	//if id has liked, the click should remove the like and if it hasnt, it should add it
-	database.forEach(item => {
-		item.likes.forEach(x => {
-			if(item.name == name && x == id)item.likes.splice(item.likes.indexOf(id), 1)
-			if(item.name == name && x != id)item.likes.push(id)
-		})
-	})
-	return database
+	database.forEach((item) => {
+		item.likes.forEach((x) => {
+			if (item.name == name && x == id)
+				item.likes.splice(item.likes.indexOf(id), 1);
+			if (item.name == name && x != id) item.likes.push(id);
+		});
+	});
+	return database;
 }
-console.log(likeProduct('TV','2edght', products));
+console.log(likeProduct("TV", "2edght", products));
 console.log(products[2]);
