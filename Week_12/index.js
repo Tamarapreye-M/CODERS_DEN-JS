@@ -11,6 +11,19 @@ console.log(
 
 /*2 */
 
+
+let question =
+	"The position of some particles on the horizontal x-axis -12, -4, -3 and -1 in the negative direction, 0 at origin, 4 and 8 in the positive direction. Extract these numbers and find the distance between the two furthest particles.";
+
+const questArr = question.match(/-?\d/g)
+const sortedArr = questArr.map(item => +item).sort((a,b) => a - b)
+console.log(sortedArr)
+
+const distance =sortedArr[sortedArr.length -1] - sortedArr[0]
+
+console.log(distance)
+
+
 /*3 */
 function is_valid_variable(str) {
 	return /^[a-z]\w*$/gi.test(str);
@@ -25,37 +38,34 @@ let paragraph = `I love teaching. If you do not love teaching what else can you 
 
 function mostFrequentWords(str, num) {
 	let obj = [...str.match(/\b\w+\b/gi)].reduce((a, curr) => {
-        // I changged everything to lowercase at first because of 'if',
-        // then I noticed that 'if' was counted seperately beccause of the casing of the other 'If'
-		!a[curr]
-			? (a[curr] = 1)
-			: a[curr]++;
-            return a
+		// I changged everything to lowercase at first because of 'if',
+		// then I noticed that 'if' was counted seperately beccause of the casing of the other 'If'
+		!a[curr] ? (a[curr] = 1) : a[curr]++;
+		return a;
 	}, {});
-    let array = []
-    for(let key in obj){
-        array = [...array, {word: key, count: obj[key]}]
-    }
-    return array.sort((a, b) => b.count - a.count).slice(0, num);
+	let array = [];
+	for (let key in obj) {
+		array = [...array, { word: key, count: obj[key] }];
+	}
+	return array.sort((a, b) => b.count - a.count).slice(0, num);
 }
 console.log(mostFrequentWords(paragraph, 10));
-
 
 // Exercise level 3
 
 /*1 */
 // write a function that cleans a sentence, then finds the 3 most frequent words
-let sentence = `%I $am@% a %tea@cher%, &and& I lo%#ve %tea@ching%;. There $is nothing; &as& mo@re rewarding as educa@ting &and& @emp%o@wering peo@ple. ;I found tea@ching m%o@re interesting tha@n any other %jo@bs. %Do@es thi%s mo@tivate yo@u to be a tea@cher!?`
+let sentence = `%I $am@% a %tea@cher%, &and& I lo%#ve %tea@ching%;. There $is nothing; &as& mo@re rewarding as educa@ting &and& @emp%o@wering peo@ple. ;I found tea@ching m%o@re interesting tha@n any other %jo@bs. %Do@es thi%s mo@tivate yo@u to be a tea@cher!?`;
 
 function cleanText(str) {
-    let clean = str.replace(/[^\w,. ]/gi, '')
-    return mostFrequentWords(clean, 3)
+	let clean = str.replace(/[^\w,. ]/gi, "");
+	return mostFrequentWords(clean, 3);
 }
 
 console.log(cleanText(sentence));
 
 // if i wanted a one liner and I wanted only the words in order of frequency
-const cleanedText = (str) => mostFrequentWords(str.replace(/[^\w,. ]/gi, ''), 3).map(x => x.word)
+const cleanedText = (str) =>
+	mostFrequentWords(str.replace(/[^\w,. ]/gi, ""), 3).map((x) => x.word);
 
 console.log(cleanedText(sentence));
-
